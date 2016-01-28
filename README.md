@@ -34,6 +34,7 @@ Instructions and Pipeline for building the [AGL Distribution](https://wiki.autom
       
         ```
         master
+        albacore
         ```
       - Description:
       

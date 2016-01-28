@@ -1,13 +1,15 @@
-# build-genivi-demo-platform
+# jenkins-build-agl-distro
+
+Instructions and Pipeline for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
 
 ## Prerequisites
 
-* [easy-jenkins](https://github.com/gmacario/easy-jenkins) installed
+* [easy-jenkins](https://github.com/gmacario/easy-jenkins) installed and running
 
 ## Instructions
 
 * Browse `http://${DOCKER_MACHINE_IP}:9080/`, click **New Item**
-  - Item name: `build-genivi-demo-platform`
+  - Item name: `build-agl-distro`
   - Type: **Pipeline**
 
   then click **OK**
@@ -19,39 +21,27 @@
       - Choices:
       
         ```
-        git://git.projects.genivi.org/genivi-demo-platform.git
-        https://github.com/gmacario/genivi-demo-platform
+        TODO
         ```
     * Choice Parameter
       - Name: `gitBranch`
       - Choices:
       
         ```
-        qemux86-64
-        qemu-ci
-        ---
-        koelsch
-        porter
-        silk
-        ---
-        minnowboard
-        --------
-        dev-imx6qsabresd-fido
-        dev-udooneo
-        dev-udooneo-fido
-        dev-qemux86-64-jethro
+        TODO
         ```
   - Pipeline
     - Definition: Pipeline script from SCM
     - SCM: Git
       - Repositories
-        - Repository URL: `https://gist.github.com/gmacario/f6f55d3ceff024de516f`
+        - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro.git`
 
   then click **Save**
 
-* Browse `http://${DOCKER_MACHINE_IP}:9080/job/build-genivi-demo-platform/build?delay=0sec` to trigger a build
+* Browse `http://${DOCKER_MACHINE_IP}:9080/job/build-agl-distro`, then click **Build with Parameters**
+  - Select gitUrl, gitBranch, then click **Build**
 
-TODO: Add build results - From <http://139.181.213.96:9080/job/build-genivi-demo-platform/1/console>:
+TODO: Add build results - From <http://139.181.213.96:9080/job/build-agl-distro/1/console>:
 
 ```
 TODO

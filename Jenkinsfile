@@ -1,4 +1,4 @@
-// build-genivi-demo-platform/Jenkinsfile
+// build-agl-distro/Jenkinsfile
 
 node('yocto') {
   // def gitUrl = "https://github.com/gmacario/genivi-demo-platform"
@@ -11,7 +11,7 @@ node('yocto') {
   sh 'ps axf'
   sh 'df -h'
   
-  sh 'bash -xec "source init.sh && bitbake genivi-demo-platform"'
+  // TODO: sh 'bash -xec "source init.sh && bitbake genivi-demo-platform"'
   // TODO: Archive artifacts
 } // node
 

@@ -39,7 +39,7 @@ then click **Save**.
 
 TODO
 
-### Create job "MIRROR-fetchall-push"
+### Create Job "MIRROR-fetchall-push"
 
 Browse `${JENKINS_DASHBOARD}/job/AGL/` > New item
 
@@ -108,3 +108,9 @@ echo "TODO:" rsync -avr . 172.30.4.151::repos/mirror/
 then click **Save**.
 
 TODO
+
+### Create Job "CI-AGL-repo"
+
+TODO
+
+<!-- EOF -->

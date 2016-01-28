@@ -13,13 +13,6 @@ node('yocto') {
   sh 'df -h'
   sh 'ls -la'
   
-  // DEBUG
-  // 
-  sh ''
-  sh ''
-  sh ''
-  sh ''
-
   // Adapted from https://build.automotivelinux.org/job/CI-AGL-repo/
   sh '''#!/bin/bash -xe
 #

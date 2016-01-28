@@ -40,6 +40,7 @@ repo sync --force-sync
 repo manifest -r
 '''
 
+  // TODO: Should parameterize args to envsetup.sh (qemux86-64, agl-image-ivi-build)
   sh '''#!/bin/bash -xe
 #
 mv agl-image-ivi-build agl-image-ivi-build2 || true
@@ -50,6 +51,7 @@ mv agl-image-ivi-build agl-image-ivi-build2 || true
 # eval export SSTATE_DIR=$(pwd)/../sstate-cache/
 # 
 source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
+echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
 # ln -sf ../../downloads
 # ln -sf ../../sstate-cache
 bitbake agl-image-ivi

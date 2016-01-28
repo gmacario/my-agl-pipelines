@@ -10,6 +10,13 @@ node('yocto') {
   sh 'printenv'
   sh 'ps axf'
   sh 'df -h'
+  sh 'ls -la'
+  
+  // DEBUG
+  sh "repo init -m default.xml -u " + gitUrl
+  sh "repo sync --force-sync"
+ 
+  sh 'ls -la'
   
   // TODO: sh 'bash -xec "source init.sh && bitbake genivi-demo-platform"'
   // TODO: Archive artifacts

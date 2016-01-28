@@ -113,4 +113,29 @@ TODO
 
 TODO
 
+### Create Job "SNAPSHOT-AGL-master"
+
+TODO
+
+<!-- (2015-12-04 10:45 CET)
+
+Jenkins Dashboard: New Item
+Item name: SNAPSHOT-AGL-master
+Type: Multi-configuration project
+Click "OK"
+Configure job "SNAPSHOT-AGL-master"
+Multi-configuration project name: SNAPSHOT-AGL-master
+Configuration Matrix > Add axis > Label expression
+Name: MACHINE
+Label Expressions: qemux86 qemux86-64
+Build > Add build step > Execute shell
+Command: TODO
+Click "Save"
+NOTE: Inside the shell script, should rename SNAPSHOT ==> BUILDDIR
+
+-->
+
+### Create Job "CI-AGL-DemoApps-CES2016"
+
+TODO
 <!-- EOF -->

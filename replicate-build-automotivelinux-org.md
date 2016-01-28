@@ -1,6 +1,6 @@
 # replicate-build-automotivelinux-org
 
-Instructions which attempt at replicating the configuration at <https://build.automotivelinux.org/> in order to build the AGL Distribution with Jenkins.
+Instructions which try to replicate the configuration at <https://build.automotivelinux.org/> for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
 
 ## Step-by-step instructions
 

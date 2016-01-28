@@ -1,11 +1,12 @@
-// build-agl-distro/Jenkinsfile
+// jenkins-build-agl-distro/Jenkinsfile
 
 node('yocto') {
-  // def gitUrl = "https://github.com/gmacario/genivi-demo-platform"
-  // def gitBranch = "qemux86-64"
+  // def gitUrl = 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo'
+  // def gitBranch = 'master'
   
   git url: gitUrl, branch: gitBranch
   
+  // DEBUG
   sh 'id'
   sh 'printenv'
   sh 'ps axf'
@@ -17,8 +18,11 @@ node('yocto') {
   sh "repo sync --force-sync"
  
   sh 'ls -la'
+  // TODO
   
+  // Leftovers from build-gdp:
   // TODO: sh 'bash -xec "source init.sh && bitbake genivi-demo-platform"'
+  
   // TODO: Archive artifacts
 } // node
 

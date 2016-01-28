@@ -16,25 +16,40 @@ Instructions and Pipeline for building the [AGL Distribution](https://wiki.autom
 
 * Inside the project configuration page, fill-in the following information:
   - This build is parameterized: Yes
-    * Choice Parameter
+    * Add Parameter > Choice Parameter
       - Name: `gitUrl`
       - Choices:
       
         ```
-        TODO
+        https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
         ```
-    * Choice Parameter
+      - Description:
+      
+        ```
+        Please select the URL of the git repository you want to build
+        ```
+    * Add Parameter > Choice Parameter
       - Name: `gitBranch`
       - Choices:
       
         ```
-        TODO
+        master
+        ```
+      - Description:
+      
+        ```
+        Please select the branch of the git repository you want to build
         ```
   - Pipeline
     - Definition: Pipeline script from SCM
-    - SCM: Git
-      - Repositories
-        - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro.git`
+      - SCM: Git
+        - Repositories
+          - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro.git`
+          - Credentials: - none -
+        - Branches to build
+          - Branch Specifier (blank for 'any'): `*/master`
+        - Repository browser: (Auto)
+      - Script Path: `Jenkinsfile`
 
   then click **Save**
 

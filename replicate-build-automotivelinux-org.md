@@ -19,6 +19,32 @@ then click **OK**. You will now be able to edit the Folder configuration:
 
 then click **Save**.
 
+### Create Job "releng-scripts"
+
+<!-- (2016-01-29 18:27 CET) -->
+
+Browse `${JENKINS_DASHBOARD}/job/AGL/` > New item
+
+* Item Name: `releng-scripts`
+* Type: Freestyle project
+
+then click **OK**. You will now be able to edit the project configuration:
+
+* Project name: `releng-scripts`
+* Description: (empty)
+
+
+* Source Code Management: Git
+  - Repositories
+    - Repository URL: `https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts`
+    - Credentials: - none -
+    - Branches to build
+      - Branch Specifier (blank for 'any'): `*/master`
+    - Repository browser: (Auto)
+
+TODO
+
+
 ### Create Job "MIRROR-fetchall-push"
 
 Browse `${JENKINS_DASHBOARD}/job/AGL/` > New item
@@ -37,6 +63,8 @@ then click **OK**. You will now be able to edit the project configuration:
 * Build Triggers
   - Build periodically
     - Schedule: TODO
+
+
 * Configuration Matrix
   - Add axis > Slaves
     - Name: `label`
@@ -51,6 +79,7 @@ then click **OK**. You will now be able to edit the project configuration:
       qemux86-64
       porter
       ```
+
 
 * Build > Add build step > Execute shell
   - Command:
@@ -146,9 +175,100 @@ To fix the error proceed as instructed:
 TODO
 ```
 
+**FIXME**: As of 2016-01-29, newer files `*-20151228.zip` are downloaded from My Renesas.
+
+
 ### Create Job "CI-AGL-repo"
 
+<!-- (2016-01-29 17:27 CET) -->
+
+Browse `${JENKINS_DASHBOARD}/job/AGL/` > New item
+
+* Item Name: `CI-AGL-repo`
+* Type: Freestyle project
+
+then click **OK**. You will now be able to edit the project configuration:
+
+* Project name: `CI-AGL-repo`
+* Description: (empty)
+* Discard Old Builds: Yes
+  - Strategy: Log Rotation
+    - Days to keep builds: (empty)
+    - Max # of builds to keep: 1
+* Restrict where this project can be run: Yes
+  - Label Expression: `yocto`
+
+
+* Source Code Management: Git
+  - Repositories
+    - Repository URL: `https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo`
+    - Credentials: - none -
+    - Branches to build
+      - Branch Specifier (blank for 'any'): `*/master`
+    - Repository browser: (Auto)
+
+
+* Build > Add build step > Execute shell
+  - Command:
+
+```
+#!/bin/bash -xe
+
+# https://build.automotivelinux.org/job/CI-AGL-repo/
+
+mv repoclone repoclone2 || true
+mkdir -p repoclone
+ionice rm -rf repoclone2
+cd repoclone
+
+repo init -m default.xml -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
+
+mkdir -p .repo/manifests/
+cp -L ../AGL-repo/default.xml .repo/manifests/
+cat .repo/manifests/default.xml
+
+repo sync --force-sync
+repo manifest -r
+
+mv agl-image-ivi-build agl-image-ivi-build2 || true
+
+mkdir -p ../downloads
+ionice rm -rf agl-image-ivi-build2
+mkdir -p ../sstate-cache
+
+eval export DL_DIR=$(pwd)/../downloads/
+eval export SSTATE_DIR=$(pwd)/../sstate-cache/
+
+source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
+#
+# echo '' >>conf/local.conf
+# echo 'IMAGE_INSTALL_append = " CES2016-demo can-utils"' >>conf/local.conf
+# echo 'BB_GENERATE_MIRROR_TARBALLS = "1"' >>conf/local.conf
+# echo '' >>conf/local.conf
+
+ln -sf ../../downloads
+ln -sf ../../sstate-cache
+
+echo TODO: bitbake agl-iamge-ivi
+
+# EOF
+```
+
+* Build > Add build step > Execute shell
+  - Command:
+
+```
+#!/bin/bash -xe
+
+cat current_default.xml
+
+# EOF
+```
+
+then click **Save**.
+
 TODO
+
 
 ### Create Job "SNAPSHOT-AGL-master"
 

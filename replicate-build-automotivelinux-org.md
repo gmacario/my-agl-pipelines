@@ -6,7 +6,7 @@ Instructions which try to replicate the configuration at <https://build.automoti
 
 ### Create Folder "AGL"
 
-Browse Jenkins Dashboard at `${JENKINS_DASHBOARD}` > New Item
+Browse Jenkins Dashboard at `${JENKINS_DASHBOARD}` > **New Item**
 
 * Item name: `AGL`
 * Type: Folder
@@ -23,7 +23,7 @@ then click **Save**.
 
 <!-- (2016-01-29 18:27 CET) -->
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/` > New item
+Browse `${JENKINS_DASHBOARD}/job/AGL/` > **New item**
 
 * Item Name: `releng-scripts`
 * Type: Freestyle project
@@ -42,12 +42,14 @@ then click **OK**. You will now be able to edit the project configuration:
       - Branch Specifier (blank for 'any'): `*/master`
     - Repository browser: (Auto)
 
-TODO
+then click **Save**.
+
+Browse `${JENKINS_DASHBOARD}/job/AGL/job/releng-scripts/` > **Build Now**
 
 
 ### Create Job "MIRROR-fetchall-push"
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/` > New item
+Browse `${JENKINS_DASHBOARD}/job/AGL/` > **New item**
 
 * Item Name: `MIRROR-featchall-push` (notice the typo)
 * Type: Multi-configuration project
@@ -116,6 +118,8 @@ echo "TODO:" rsync -avr . 172.30.4.151::repos/mirror/
 ```
 
 then click **Save**.
+
+Browse `${JENKINS_DASHBOARD}/job/AGL/job/MIRROR-featchall-push/` > **Build Now**
 
 **NOTE**: Job "MIRROR-featchall-push/MACHINE=porter" will fail with the following error:
 

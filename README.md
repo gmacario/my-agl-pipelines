@@ -8,7 +8,7 @@ Instructions for setting up a Pipeline for building the [AGL Distribution](https
 
 ## Instructions
 
-* Browse `http://${DOCKER_MACHINE_IP}:9080/`, click **New Item**
+* Browse `http://${DOCKER_MACHINE_IP}:9080/`, then click **New Item**
   - Item name: `build-agl-distro`
   - Type: **Pipeline**
 

@@ -4,11 +4,12 @@ Instructions for setting up a Pipeline for building the [AGL Distribution](https
 
 ## Prerequisites
 
-* [easy-jenkins](https://github.com/gmacario/easy-jenkins) installed and running
+* Jenkins successfully installed through [easy-jenkins](https://github.com/gmacario/easy-jenkins)
+* Jenkins dashboard accessible at `${JENKINS_URL}` (example: `http://$(docker-machine ip easy-jenkins):9080/`)
 
 ## Instructions
 
-* Browse `http://${DOCKER_MACHINE_IP}:9080/`, then click **New Item**
+* Browse `${JENKINS_URL}`, then click **New Item**
   - Item name: `build-agl-distro`
   - Type: **Pipeline**
 
@@ -54,8 +55,8 @@ Instructions for setting up a Pipeline for building the [AGL Distribution](https
 
   then click **Save**
 
-* Browse `http://${DOCKER_MACHINE_IP}:9080/job/build-agl-distro`, then click **Build with Parameters**
-  - Select gitUrl, gitBranch, then click **Build**
+* Browse `${JENKINS_URL}/job/build-agl-distro`, then click **Build with Parameters**
+  - Choose values for `gitUrl` and `gitBranch`, then click **Build**
 
 TODO: Add build results - From <http://139.181.213.96:9080/job/build-agl-distro/1/console>:
 

@@ -7,7 +7,7 @@ Instructions for setting up a Pipeline for building the [AGL Distribution](https
 * Jenkins successfully installed through [easy-jenkins](https://github.com/gmacario/easy-jenkins)
 * Jenkins dashboard accessible at `${JENKINS_URL}` (example: `http://$(docker-machine ip easy-jenkins):9080/`)
 
-## Instructions
+## Step-by-step Instructions
 
 * Browse `${JENKINS_URL}`, then click **New Item**
   - Item name: `build-agl-distro`

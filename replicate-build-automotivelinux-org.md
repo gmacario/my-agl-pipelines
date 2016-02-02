@@ -274,20 +274,41 @@ ln -sf ../../sstate-cache
 
 echo "" >> conf/local.conf
 echo 'INHERIT += "archiver"' >>conf/local.conf
-# echo 'IMAGE_INSTALL_append = " mc"' >> conf/local.conf
-# TODO
+echo 'ARCHIVER_MODE[src] = "original"' >>conf/local.conf
+echo 'IMAGE_INSTALL_append = " CES2016-demo mc"' >>conf/local.conf
+test xqemux86 == x${MACHINE} -o xqemux86-64 == x${MACHINE} && echo 'IMAGE_FSTYPES += "vmdk"' >>conf/local.conf
 
 # finally, build the agl-demo-platform
 echo "TODO:" bitbake agl-demo-platform || exit 1
-du -hs tmp/deploy/*
 
-# create the archive
-mkdir -p archive
-cp ../../current_default.xml archive/
-cp conf/local.conf archive/
-tar -C tmp/deploy -cf archive/licenses.tar licenses
+test xporter == x${MACHINE} && echo TODO
+
+export mydate=$(date +%F)
+mv SNAPSHOT SNAPSHOT2 || true
+rm -rf SNAPSHORT2
+mkdir -p SNAPSHOT/${mydate}/${MACHINE}
+export DEST=$(pwd)/SNAPSHOT/${mydate}/${MACHINE}
+export RSYNCSRC=$(pwd)/SNAPSHOT/
+echo "TODO:" rsync -avr --progress --delete tmp/deploy ${DEST}
 
 # TODO
+
+cp ../${MACHINE}_default.xml ${DEST}/${MACHINE}_default.xml
+cp conf/local.conf ${DEST}/${MACHINE}/local.conf
+echo https://build.automotivelinux.org/job/SNAPSHOT-AGL-master/MACHINE=qemux86-64/126/
+tree ${DEST}/${MACHINE}
+
+# TODO
+
+echo "TODO:" rsync -avr ${RSYNCSRC}/ 172.30.4.151::repos/snapshots/master/
+
+echo "TODO:" pushd ${RSYNCSRC}
+echo "TODO:" rm -rf latest
+echo "TODO:" ln -sf ${mydate} latest
+echo "TODO:" echo ${mydate}
+echo "TODO:" popd
+
+echo "TODO:" rsync -alvr ${RSYNCSRC}/ 172.30.4.151::repos/snapshots/master/
 
 # EOF
 ```

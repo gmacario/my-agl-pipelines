@@ -78,7 +78,7 @@ Inside the project configuration page, fill-in the following information:
 
 
 * Advanced Project Options
-  - Restrict where this project can be run
+  - Restrict where this project can be run: Yes
     - Label Expression: `yocto`
 
 
@@ -213,12 +213,20 @@ Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 * Item Name: `SNAPSHOT-AGL-master`
 * Type: Multi-configuration project
 
-then click OK.
+then click **OK**.
 
 Inside the project configuration page, fill-in the following information:
 
 * Project name: `SNAPSHOT-AGL-master`
 * Description: (empty)
+
+* Advanced Project Options
+  - Restrict where this project can be run: Yes
+    - Label Expression: `yocto`
+
+* Build Triggers
+  - Build periodically
+    - Schedule: TODO
 
 * Configuration Matrix
   - Add axis > Slaves
@@ -233,7 +241,6 @@ Inside the project configuration page, fill-in the following information:
       qemux86-64
       intel-corei7-64
       ```
-
 
 * Build > Add build step > Execute shell
   - Command:
@@ -313,42 +320,15 @@ echo "TODO:" rsync -alvr ${RSYNCSRC}/ 172.30.4.151::repos/snapshots/master/
 # EOF
 ```
 
-TODO TODO TODO
+* Post-build Actions
+  - Add post-build action > Archive the artifacts
+    - File to archive: `TODO` (intel-core7-64_default.xml)
 
-<!-- 
-Source Code Management: Git
-
-Repositories
-Repository URL: https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts
-Credentials: - none -
-Branches to build
-Branch Specifier (blank for 'any'): */master
-Repository browser: (Auto)
-then click Save.
--->
-
-TODO
-
-<!-- (2015-12-04 10:45 CET)
-
-Jenkins Dashboard: New Item
-Item name: SNAPSHOT-AGL-master
-Type: Multi-configuration project
-Click "OK"
-Configure job "SNAPSHOT-AGL-master"
-Multi-configuration project name: SNAPSHOT-AGL-master
-Configuration Matrix > Add axis > Label expression
-Name: MACHINE
-Label Expressions: qemux86 qemux86-64
-Build > Add build step > Execute shell
-Command: TODO
-Click "Save"
-NOTE: Inside the shell script, should rename SNAPSHOT ==> BUILDDIR
--->
+then click **Save**.
 
 Browse `${JENKINS_URL}/job/AGL/job/SNAPSHOT-AGL-master/`, then click **Build Now**
 
-TODO
+Result: TODO
 
 
 ### Create Job "CI-AGL-repo"

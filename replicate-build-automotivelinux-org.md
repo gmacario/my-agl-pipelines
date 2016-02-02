@@ -6,7 +6,7 @@ Instructions which try to replicate the configuration at <https://build.automoti
 
 ### Create Folder "AGL"
 
-Browse Jenkins Dashboard at `${JENKINS_DASHBOARD}`, then click **New Item**
+Browse Jenkins Dashboard at `${JENKINS_URL}`, then click **New Item**
 
 * Item name: `AGL`
 * Type: Folder
@@ -25,7 +25,7 @@ then click **Save**.
 
 <!-- (2016-01-29 18:27 CET) -->
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/`, then click **New item**
+Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `releng-scripts`
 * Type: Freestyle project
@@ -48,12 +48,12 @@ Inside the project configuration page, fill-in the following information:
 
 then click **Save**.
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/job/releng-scripts/`, then click **Build Now**
+Browse `${JENKINS_URL}/job/AGL/job/releng-scripts/`, then click **Build Now**
 
 
 ### Create Job "MIRROR-fetchall-push"
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/`, then click **New item**
+Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `MIRROR-featchall-push` (notice the typo)
 * Type: Multi-configuration project
@@ -125,7 +125,7 @@ echo "TODO:" rsync -avr . 172.30.4.151::repos/mirror/
 
 then click **Save**.
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/job/MIRROR-featchall-push/`, then click **Build Now**
+Browse `${JENKINS_URL}/job/AGL/job/MIRROR-featchall-push/`, then click **Build Now**
 
 **NOTE**: Job "MIRROR-featchall-push/MACHINE=porter" will fail with the following error:
 
@@ -192,7 +192,7 @@ TODO
 
 <!-- (2016-01-29 17:27 CET) -->
 
-Browse `${JENKINS_DASHBOARD}/job/AGL/`, then click **New item**
+Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `CI-AGL-repo`
 * Type: Freestyle project
@@ -312,7 +312,7 @@ TODO
 
 ### Create View "AGL_Build_Pipeline"
 
-Browse `${JENKINS_DASHBOARD}/job/AGL`, then click **New View**
+Browse `${JENKINS_URL}/job/AGL`, then click **New View**
 
 * View name: `AGL_Build_Pipeline`
 * Type: Build Pipeline View

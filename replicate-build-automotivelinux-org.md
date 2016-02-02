@@ -301,7 +301,7 @@ echo 'IMAGE_INSTALL_append = " CES2016-demo mc"' >>conf/local.conf
 test xqemux86 == x${MACHINE} -o xqemux86-64 == x${MACHINE} && echo 'IMAGE_FSTYPES += "vmdk"' >>conf/local.conf
 
 # finally, build the agl-demo-platform
-echo "TODO:" bitbake agl-demo-platform || exit 1
+bitbake agl-demo-platform || exit 1
 
 test xporter == x${MACHINE} && echo TODO
 
@@ -324,11 +324,11 @@ tree ${DEST}/${MACHINE}
 
 echo "TODO:" rsync -avr ${RSYNCSRC}/ 172.30.4.151::repos/snapshots/master/
 
-echo "TODO:" pushd ${RSYNCSRC}
-echo "TODO:" rm -rf latest
-echo "TODO:" ln -sf ${mydate} latest
-echo "TODO:" echo ${mydate}
-echo "TODO:" popd
+pushd ${RSYNCSRC}
+rm -rf latest
+ln -sf ${mydate} latest
+echo ${mydate} >latest.txt
+popd
 
 echo "TODO:" rsync -alvr ${RSYNCSRC}/ 172.30.4.151::repos/snapshots/master/
 

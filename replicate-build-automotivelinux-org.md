@@ -211,7 +211,7 @@ TODO
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `SNAPSHOT-AGL-master`
-* Type: Freestyle project
+* Type: Multi-configuration project
 
 then click OK.
 
@@ -219,6 +219,78 @@ Inside the project configuration page, fill-in the following information:
 
 * Project name: `SNAPSHOT-AGL-master`
 * Description: (empty)
+
+* Configuration Matrix
+  - Add axis > Slaves
+    - Name: `label`
+    - Node/Label
+      - Labels: `yocto`
+  - Add axis > User-defined Axis
+    - Name: `MACHINE`
+    - Values:
+
+      ```
+      qemux86-64
+      intel-corei7-64
+      ```
+
+
+* Build > Add build step > Execute shell
+  - Command:
+
+```
+#!/bin/bash -xe
+
+# Adapted from https://build.automotivelinux.org/job/SNAPSHOT-AGL-master/
+set | grep MACHINE
+repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
+repo sync
+
+repo manifest -r >../current_default.xml # TODO???
+
+mv agl-snap-${MACHINE} agl-snap-${MACHINE}2 || true
+(ionice rm -rf agl-snap-${MACHINE}2 &) || true
+
+if test x"meta-renesas" == x"$MYPROJECT" ; then
+  export MACHINE=porter
+fi
+  
+if test x"" == x"$MACHINE" ; then
+  export MACHINE=qemux86
+fi
+
+mkdir -p ../downloads
+mkdir -p ../state-cache
+
+eval export DL_DIR=$(pwd)/../downloads/
+eval export SSTATE_DIR=$(pwd)/../sstate-cache/
+
+# source the env
+source meta-agl/scripts/envsetup.sh ${MACHINE} agl-snap-${MACHINE}
+
+# link the shared downloads and sstate-cache
+ln -sf ../../downloads
+ln -sf ../../sstate-cache
+
+echo "" >> conf/local.conf
+echo 'INHERIT += "archiver"' >>conf/local.conf
+# echo 'IMAGE_INSTALL_append = " mc"' >> conf/local.conf
+# TODO
+
+# finally, build the agl-demo-platform
+echo "TODO:" bitbake agl-demo-platform || exit 1
+du -hs tmp/deploy/*
+
+# create the archive
+mkdir -p archive
+cp ../../current_default.xml archive/
+cp conf/local.conf archive/
+tar -C tmp/deploy -cf archive/licenses.tar licenses
+
+# TODO
+
+# EOF
+```
 
 TODO TODO TODO
 

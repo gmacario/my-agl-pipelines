@@ -219,6 +219,10 @@ Inside the project configuration page, fill-in the following information:
 
 * Project name: `SNAPSHOT-AGL-master`
 * Description: (empty)
+* Discard Old Builds: Yes
+  - Strategy: Log Rotation
+    - Days to keep builds: (empty)
+    - Max # of builds to keep: 2
 
 * Advanced Project Options
   - Restrict where this project can be run: Yes
@@ -295,7 +299,7 @@ echo "TODO:" bitbake agl-demo-platform || exit 1
 
 test xporter == x${MACHINE} && echo TODO
 
-export mydate=$(date +%F)-b126    # TODO: -b${BUILD_NUMBER}?
+export mydate=$(date +%F)-b${BUILD_ID}
 mv SNAPSHOT SNAPSHOT2 || true
 rm -rf SNAPSHOT2
 mkdir -p SNAPSHOT/${mydate}/${MACHINE}

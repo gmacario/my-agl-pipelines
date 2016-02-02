@@ -58,7 +58,7 @@ Browse `${JENKINS_URL}/job/AGL/job/releng-scripts/`, then click **Build Now**
 
 ### Create Job "MIRROR-fetchall-push"
 
-<!-- (2016-02-02 15:23 CET) -->
+<!-- (2016-02-02 15:54 CET) -->
 
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
@@ -75,6 +75,11 @@ Inside the project configuration page, fill-in the following information:
   - Strategy: Log Rotation
     - Days to keep builds: (empty)
     - Max # of builds to keep: 2
+
+
+* Advanced Project Options
+  - Restrict where this project can be run
+    - Label Expression: `yocto`
 
 
 * Build Triggers
@@ -110,9 +115,9 @@ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
 repo sync --force-sync -d
 
 mkdir -p ../downloads
-test -d fetchall && mv fetchall fetchall2
-test '!' -d fetchall && mkdir fetchall
-rm -rf fetchall2
+mv fetchall fetchall2 || true
+(ionice rm -rf fetchall2 &) || true
+mkdir -p fetchall
 source meta-agl/scripts/envsetup.sh ${MACHINE} fetchall
 
 echo '' >>conf/local.conf
@@ -134,6 +139,8 @@ echo "TODO:" rsync -avr . 172.30.4.151::repos/mirror/
 
 then click **Save**.
 
+<!-- (2016-02-02 15:56 CET) -->
+
 Browse `${JENKINS_URL}/job/AGL/job/MIRROR-featchall-push/`, then click **Build Now**
 
 **NOTE**: Job "MIRROR-featchall-push/MACHINE=porter" will fail with the following error:
@@ -144,7 +151,7 @@ Browse `${JENKINS_URL}/job/AGL/job/MIRROR-featchall-push/`, then click **Build N
 ++ '[' -z porter ']'
 ++ MACHINE=porter
 ++ '[' -z '' ']'
-++ TEMPLATECONF=/home/jenkins/workspace/MIRROR-featchall-push/MACHINE/porter/label/build-yocto-slave/meta-agl-demo/templates/porter/conf
+++ TEMPLATECONF=/home/jenkins/workspace/AGL/MIRROR-featchall-push/MACHINE/porter/label/yocto/meta-agl-demo/templates/porter/conf
 ++ case "$MACHINE" in
 ++ COPY_MM_SCRIPT=meta-renesas/meta-rcar-gen2/scripts/setup_mm_packages.sh
 ++ '[' -f meta-renesas/meta-rcar-gen2/scripts/setup_mm_packages.sh ']'
@@ -188,7 +195,7 @@ To fix the error proceed as instructed:
 2. Download the following files (to download, log-in to My Renesas or create a My Renesas account):
   * `R-Car_Series_Evaluation_Software_Package_for_Linux-20151130.zip`
   * `R-Car_Series_Evaluation_Software_Package_of_Linux_Drivers-20151130.zip`
-2. Copy the two files to directory `/home/Jenkins/Download` of slave `build-yocto-slave`
+3. Copy those two files to directory `/home/Jenkins/Download` of slave `build-yocto-slave`:
 
 ```
 TODO

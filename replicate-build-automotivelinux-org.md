@@ -80,6 +80,9 @@ Inside the project configuration page, fill-in the following information:
 * Advanced Project Options
   - Restrict where this project can be run: Yes
     - Label Expression: `yocto`
+  - Use custom child workspace
+    - Child Directory: ../${MACHINE}
+    - Display Name: (empty)
 
 
 * Build Triggers

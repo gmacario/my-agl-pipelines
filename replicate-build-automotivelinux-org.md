@@ -58,6 +58,8 @@ Browse `${JENKINS_URL}/job/AGL/job/releng-scripts/`, then click **Build Now**
 
 ### Create Job "MIRROR-fetchall-push"
 
+<!-- (2016-02-02 15:23 CET) -->
+
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `MIRROR-featchall-push` (notice the typo)
@@ -72,7 +74,9 @@ Inside the project configuration page, fill-in the following information:
 * Discard Old Builds: Yes
   - Strategy: Log Rotation
     - Days to keep builds: (empty)
-    - Max # of builds to keep: 3
+    - Max # of builds to keep: 2
+
+
 * Build Triggers
   - Build periodically
     - Schedule: TODO
@@ -82,7 +86,7 @@ Inside the project configuration page, fill-in the following information:
   - Add axis > Slaves
     - Name: `label`
     - Node/Label
-      - Individual nodes: `build-yocto-slave`
+      - Labels: `yocto`
   - Add axis > User-defined Axis
     - Name: `MACHINE`
     - Values:
@@ -190,7 +194,7 @@ To fix the error proceed as instructed:
 TODO
 ```
 
-**FIXME**: As of 2016-01-29, newer files `*-20151228.zip` are downloaded from My Renesas.
+**FIXME**: As of 2016-01-29, the files downloaded from the My Renesas website are newer (`*-20151228.zip`) than those expected by the script `meta-renesas/meta-rcar-gen2/scripts/setup_mm_packages.sh`.
 
 
 ### Create Job "CI-AGL-repo"

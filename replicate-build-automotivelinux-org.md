@@ -227,6 +227,9 @@ Inside the project configuration page, fill-in the following information:
 * Advanced Project Options
   - Restrict where this project can be run: Yes
     - Label Expression: `yocto`
+  - Use custom child workspace
+    - Child Directory: `../${MACHINE}`
+    - Display Name: (empty)
 
 * Build Triggers
   - Build periodically
@@ -276,7 +279,7 @@ if test x"" == x"$MACHINE" ; then
 fi
 
 mkdir -p ../downloads
-mkdir -p ../state-cache
+mkdir -p ../sstate-cache
 
 eval export DL_DIR=$(pwd)/../downloads/
 eval export SSTATE_DIR=$(pwd)/../sstate-cache/

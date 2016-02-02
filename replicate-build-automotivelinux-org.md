@@ -337,7 +337,7 @@ echo "TODO:" rsync -alvr ${RSYNCSRC}/ 172.30.4.151::repos/snapshots/master/
 
 * Post-build Actions
   - Add post-build action > Archive the artifacts
-    - File to archive: `**/*_default.xml` (i.e.: `intel-core7-64_default.xml`)
+    - File to archive: `${MACHINE}_default.xml` (i.e.: `intel-core7-64_default.xml`)
 
 then click **Save**.
 

@@ -1,6 +1,11 @@
 # replicate-build-automotivelinux-org
 
-Instructions which try to replicate the configuration at <https://build.automotivelinux.org/> for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
+Instructions to reproduce a similar configuration of the [Jenkins](https://jenkins-ci.org/) CI/CD server at <https://build.automotivelinux.org/> used for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) from sources.
+
+## Preconditions
+
+* Jenkins installed and running using [gmacario/easy-jenkins](https://github.com/gmacario/easy-jenkins)
+* Jenkins dashboard accessible at `${JENKINS_URL}` (example: <http://192.168.99.100:9080/>)
 
 ## Step-by-step instructions
 

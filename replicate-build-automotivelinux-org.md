@@ -204,6 +204,60 @@ TODO
 **FIXME**: As of 2016-01-29, the files downloaded from the My Renesas website are newer (`*-20151228.zip`) than those expected by the script `meta-renesas/meta-rcar-gen2/scripts/setup_mm_packages.sh`.
 
 
+### Create Job "SNAPSHOT-AGL-master"
+
+<!-- (2016-02-02 15:59 CET) -->
+
+Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
+
+* Item Name: `SNAPSHOT-AGL-master`
+* Type: Freestyle project
+
+then click OK.
+
+Inside the project configuration page, fill-in the following information:
+
+* Project name: `SNAPSHOT-AGL-master`
+* Description: (empty)
+
+TODO TODO TODO
+
+<!-- 
+Source Code Management: Git
+
+Repositories
+Repository URL: https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts
+Credentials: - none -
+Branches to build
+Branch Specifier (blank for 'any'): */master
+Repository browser: (Auto)
+then click Save.
+-->
+
+TODO
+
+<!-- (2015-12-04 10:45 CET)
+
+Jenkins Dashboard: New Item
+Item name: SNAPSHOT-AGL-master
+Type: Multi-configuration project
+Click "OK"
+Configure job "SNAPSHOT-AGL-master"
+Multi-configuration project name: SNAPSHOT-AGL-master
+Configuration Matrix > Add axis > Label expression
+Name: MACHINE
+Label Expressions: qemux86 qemux86-64
+Build > Add build step > Execute shell
+Command: TODO
+Click "Save"
+NOTE: Inside the shell script, should rename SNAPSHOT ==> BUILDDIR
+-->
+
+Browse `${JENKINS_URL}/job/AGL/job/SNAPSHOT-AGL-master/`, then click **Build Now**
+
+TODO
+
+
 ### Create Job "CI-AGL-repo"
 
 <!-- (2016-01-29 17:27 CET) -->
@@ -296,29 +350,6 @@ cat current_default.xml
 then click **Save**.
 
 TODO
-
-
-### Create Job "SNAPSHOT-AGL-master"
-
-TODO
-
-<!-- (2015-12-04 10:45 CET)
-
-Jenkins Dashboard: New Item
-Item name: SNAPSHOT-AGL-master
-Type: Multi-configuration project
-Click "OK"
-Configure job "SNAPSHOT-AGL-master"
-Multi-configuration project name: SNAPSHOT-AGL-master
-Configuration Matrix > Add axis > Label expression
-Name: MACHINE
-Label Expressions: qemux86 qemux86-64
-Build > Add build step > Execute shell
-Command: TODO
-Click "Save"
-NOTE: Inside the shell script, should rename SNAPSHOT ==> BUILDDIR
-
--->
 
 
 ### Create Job "CI-AGL-DemoApps-CES2016"

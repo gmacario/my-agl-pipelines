@@ -81,7 +81,7 @@ Inside the project configuration page, fill-in the following information:
   - Restrict where this project can be run: Yes
     - Label Expression: `yocto`
   - Use custom child workspace
-    - Child Directory: ../${MACHINE}
+    - Child Directory: `../${MACHINE}`
     - Display Name: (empty)
 
 
@@ -104,7 +104,7 @@ Inside the project configuration page, fill-in the following information:
       qemux86-64
       porter
       ```
-
+  - Run each configuration sequentially: Yes
 
 * Build > Add build step > Execute shell
   - Command:

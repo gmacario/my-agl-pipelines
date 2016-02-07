@@ -1,10 +1,10 @@
 # replicate-build-automotivelinux-org
 
-Instructions to reproduce a similar configuration of the [Jenkins](https://jenkins-ci.org/) CI/CD server at <https://build.automotivelinux.org/> used for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) from sources.
+Instructions to reproduce a similar configuration of the [Jenkins](https://jenkins-ci.org/) CI/CD server at <https://build.automotivelinux.org/> used for building from sources the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro).
 
 ## Preconditions
 
-* Jenkins installed and running using [gmacario/easy-jenkins](https://github.com/gmacario/easy-jenkins)
+* Jenkins successfully installed through [easy-jenkins](https://github.com/gmacario/easy-jenkins)
 * Jenkins dashboard accessible at `${JENKINS_URL}` (example: <http://192.168.99.100:9080/>)
 
 ## Step-by-step instructions
@@ -14,7 +14,7 @@ Instructions to reproduce a similar configuration of the [Jenkins](https://jenki
 Browse Jenkins Dashboard at `${JENKINS_URL}`, then click **New Item**
 
 * Item name: `AGL`
-* Type: Folder
+* Type: **Folder**
 
 then click **OK**.
 
@@ -33,7 +33,7 @@ then click **Save**.
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `releng-scripts`
-* Type: Freestyle project
+* Type: **Freestyle project**
 
 then click **OK**.
 
@@ -62,8 +62,8 @@ Browse `${JENKINS_URL}/job/AGL/job/releng-scripts/`, then click **Build Now**
 
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
-* Item Name: `MIRROR-featchall-push` (notice the typo)
-* Type: Multi-configuration project
+* Item Name: `MIRROR-featchall-push` (the typo is intentional)
+* Type: **Multi-configuration project**
 
 then click **OK**.
 
@@ -209,12 +209,12 @@ TODO
 
 ### Create Job "SNAPSHOT-AGL-master"
 
-<!-- (2016-02-02 15:59 CET) -->
+<!-- (2016-02-07 17:55 CET) -->
 
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `SNAPSHOT-AGL-master`
-* Type: Multi-configuration project
+* Type: **Multi-configuration project**
 
 then click **OK**.
 
@@ -252,8 +252,9 @@ Inside the project configuration page, fill-in the following information:
       intel-corei7-64
       ```
 
-* Build > Add build step > Execute shell
-  - Command:
+* Build 
+  - Add build step > Execute shell
+    - Command:
 
 ```
 #!/bin/bash -xe
@@ -343,6 +344,8 @@ then click **Save**.
 
 Browse `${JENKINS_URL}/job/AGL/job/SNAPSHOT-AGL-master/`, then click **Build Now**
 
+<!-- (2016-02-07 17:58 CET) -->
+
 Result: TODO
 
 
@@ -353,7 +356,7 @@ Result: TODO
 Browse `${JENKINS_URL}/job/AGL/`, then click **New item**
 
 * Item Name: `CI-AGL-repo`
-* Type: Freestyle project
+*** Type: **Freestyle project
 
 then click **OK**.
 
@@ -450,7 +453,7 @@ TODO
 Browse `${JENKINS_URL}/job/AGL`, then click **New View**
 
 * View name: `AGL_Build_Pipeline`
-* Type: Build Pipeline View
+* Type: **Build Pipeline View**
 
 then click **OK**. You will now be able to edit the View configuration:
 

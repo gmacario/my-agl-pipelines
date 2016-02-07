@@ -134,7 +134,7 @@ bitbake -k -c fetchall world || true
 cd downloads
 rm -rf git2
 touch 0000.done
-find . -name '*.done' | xargs rm
+find . -name '*.done' | xargs rm -f
 echo "TODO:" rsync -avr . 172.30.4.151::repos/mirror/
 
 # EOF

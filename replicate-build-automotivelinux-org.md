@@ -346,7 +346,61 @@ Browse `${JENKINS_URL}/job/AGL/job/SNAPSHOT-AGL-master/`, then click **Build Now
 
 <!-- (2016-02-07 17:58 CET) -->
 
-Result: TODO
+Result: FAILURE
+
+Extract from https://gist.github.com/gmacario/a52ef9d8cd3976803cd5
+
+```
+Started by upstream project "AGL/SNAPSHOT-AGL-master" build number 24
+originally caused by:
+ Started by user anonymous
+[EnvInject] - Loading node environment variables.
+Building remotely on build-yocto-slave (yocto) in workspace /home/jenkins/workspace/AGL/qemux86-64
+[qemux86-64] $ /bin/bash -xe /tmp/hudson724961224939689237.sh
++ env
++ sort
+BUILD_CAUSE=UPSTREAMTRIGGER
+BUILD_CAUSE_UPSTREAMTRIGGER=true
+BUILD_DISPLAY_NAME=#24
+BUILD_ID=24
+BUILD_NUMBER=24
+BUILD_TAG=jenkins-AGL-SNAPSHOT-AGL-master-MACHINE=qemux86-64,label=yocto-24
+...
+NOTE: Running task 3492 of 4908 (ID: 9, /home/jenkins/workspace/AGL/qemux86-64/poky/../meta-agl-demo/recipes-platform/images/agl-demo-platform.bb, do_bootdirectdisk)
+NOTE: recipe agl-demo-platform-1.0-r0: task do_bootdirectdisk: Started
+ERROR: Function failed: build_boot_dd (log file is located at /home/jenkins/workspace/AGL/qemux86-64/agl-snap-qemux86-64/tmp/work/qemux86_64-poky-linux/agl-demo-platform/1.0-r0/temp/log.do_bootdirectdisk.8552)
+ERROR: Logfile of failure stored in: /home/jenkins/workspace/AGL/qemux86-64/agl-snap-qemux86-64/tmp/work/qemux86_64-poky-linux/agl-demo-platform/1.0-r0/temp/log.do_bootdirectdisk.8552
+Log data follows:
+| DEBUG: Executing python function do_bootdirectdisk
+| DEBUG: Executing python function build_syslinux_cfg
+| DEBUG: Python function build_syslinux_cfg finished
+| DEBUG: Executing shell function build_boot_dd
+| mkfs.fat: warning - lowercase labels might not work properly with DOS or Windows
+| mkfs.fat 3.0.28 (2015-05-16)
+| Can't open /proc/8645/fd/3: Permission denied
+| Cannot initialize 'S:'
+| Bad target s:/ldlinux.sys
+| WARNING: exit code 141 from a shell command.
+| DEBUG: Python function do_bootdirectdisk finished
+| ERROR: Function failed: build_boot_dd (log file is located at /home/jenkins/workspace/AGL/qemux86-64/agl-snap-qemux86-64/tmp/work/qemux86_64-poky-linux/agl-demo-platform/1.0-r0/temp/log.do_bootdirectdisk.8552)
+NOTE: recipe agl-demo-platform-1.0-r0: task do_bootdirectdisk: Failed
+ERROR: Task 9 (/home/jenkins/workspace/AGL/qemux86-64/poky/../meta-agl-demo/recipes-platform/images/agl-demo-platform.bb, do_bootdirectdisk) failed with exit code '1'
+NOTE: Running task 3493 of 4908 (ID: 4905, /home/jenkins/workspace/AGL/qemux86-64/poky/meta/recipes-graphics/xorg-proto/xproto_7.0.28.bb, do_ar_original)
+NOTE: recipe xproto-1_7.0.28-r0: task do_ar_original: Started
+NOTE: recipe xproto-1_7.0.28-r0: task do_ar_original: Succeeded
+NOTE: recipe glibc-locale-2.22-r0: task do_package_write_rpm: Succeeded
+NOTE: Tasks Summary: Attempted 3493 tasks of which 2149 didn't need to be rerun and 1 failed.
+
+Summary: 1 task failed:
+  /home/jenkins/workspace/AGL/qemux86-64/poky/../meta-agl-demo/recipes-platform/images/agl-demo-platform.bb, do_bootdirectdisk
+Summary: There were 3 WARNING messages shown.
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
++ exit 1
+Build step 'Execute shell' marked build as failure
+Archiving artifacts
+Notifying upstream projects of job completion
+Finished: FAILURE
+```
 
 
 ### Create Job "CI-AGL-repo"

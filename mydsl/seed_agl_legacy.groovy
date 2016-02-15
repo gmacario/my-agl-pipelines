@@ -39,17 +39,17 @@ together with a few projects inside
 def folderName = 'AGL-legacy'
 
 folder(folderName) {
-  displayName('build.automotivelinux.org')
-  description('Replica of https://build.automotivelinux.org/')
+    displayName('build.automotivelinux.org')
+    description('Replica of https://build.automotivelinux.org/')
 }
 
 
 freeStyleJob(folderName + '/releng-scripts') {
-  scm {
-      git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
-        branches('*/master')
-      }
-  }
+    scm {
+        git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
+            branches('*/master')
+        }
+    }
 }		// end releng-scripts
 
 
@@ -57,18 +57,18 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
   
   // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
   configure { project ->
-    project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
-      strategy(class: "hudson.tasks.LogRotator") {
-        daysToKeep(-1)
-        numToKeep(2)
-        artifactDaysToKeep(-1)
-        artifactNumToKeep(-1)
+      project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
+          strategy(class: "hudson.tasks.LogRotator") {
+              daysToKeep(-1)
+              numToKeep(2)
+              artifactDaysToKeep(-1)
+              artifactNumToKeep(-1)
+          }
       }
-    }
+      // Advanced Project Options / Restrict where this project can be run: Yes / Label Expression: Yocto
+      (project / 'assignedNode').value = 'yocto'
+      (project / 'canRoam').value = 'false'
   }
-  
-  // Restrict where this project can be run: Yes / Label Expression: Yocto
-  // TODO
   
   // Advanced Project Options / Use custom child workspace
   childCustomWorkspace('../${MACHINE}')
@@ -78,8 +78,8 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
   
   // Configuration Matrix
   axes {
-    label('label', 'yocto')
-    text('MACHINE', 'qemux86', 'qemux86-64', 'porter')
+      label('label', 'yocto')
+      text('MACHINE', 'qemux86', 'qemux86-64', 'porter')
   }
   
   // Build > Add build step > Execute shell

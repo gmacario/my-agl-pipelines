@@ -35,13 +35,15 @@ folder(folderName) {
   description('Replica of https://build.automotivelinux.org/')
 }
 
+
 freeStyleJob(folderName + '/releng-scripts') {
   scm {
       git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
         branches('*/master')
       }
   }
-}
+}		// end releng-scripts
+
 
 matrixJob(folderName + '/MIRROR-featchall-push') {
   
@@ -57,39 +59,27 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
     }
   }
   
-  // TODO: Restrict where this project can be run: Yes / Label Expression: Yocto
+  // Restrict where this project can be run: Yes / Label Expression: Yocto
+  // TODO
   
+  // Advanced Project Options / Use custom child workspace
   childCustomWorkspace('../${MACHINE}')
   
-  // TODO: Build periodically / Schedule: TODO
+  // Build Triggers / Build periodically / Schedule: TODO
+  // TODO
   
-  // TODO: Configuration Matrix
+  // Configuration Matrix
   axes {
     label('label', 'yocto')
     text('MACHINE', 'qemux86', 'qemux86-64', 'porter')
   }
+  
+  // Build > Add build step > Execute shell
   steps {
       shell "printenv"
       shell "echo TODO"
   }
-}
-
-/* OLD STUFF BELOW:
-
- label('yocto')
-
-  scm {
-      git(gitUrl, gitBranch) {
-        // TODO
-      }
-  }
-
-  steps {
-      shell "id"
-      // shell "printenv"
-      // shell "ps axf"
-      // shell "bash -xec \"source init.sh && bitbake genivi-demo-platform\""
-  }
-*/
+  
+}		// end MIRROR-fetachall-push
 
 // EOF

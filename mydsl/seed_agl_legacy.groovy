@@ -53,6 +53,51 @@ freeStyleJob(folderName + '/releng-scripts') {
 }		// end releng-scripts
 
 
+matrixJob(folderName + '/CI-AGL-DemoApps-CES2016') {
+    // TODO
+}		// end CI-AGL-DemoApps-CES2016
+
+
+matrixJob(folderName + '/CI-AGL-repo') {
+    // TODO
+}		// end CI-AGL-repo
+
+
+matrixJob(folderName + '/CI-external-meta-openembedded') {
+    // TODO
+}		// end CI-external-meta-openembedded
+
+
+matrixJob(folderName + '/CI-external-meta-qt5') {
+    // TODO
+}		// end CI-external-meta-qt5
+
+
+matrixJob(folderName + '/CI-external-poky') {
+    // TODO
+}		// end CI-external-poky
+
+
+matrixJob(folderName + '/CI-meta-agl') {
+    // TODO
+}		// end CI-meta-agl
+
+
+matrixJob(folderName + '/CI-meta-agl-demo') {
+    // TODO
+}		// end CI-meta-agl-demo
+
+
+matrixJob(folderName + '/CI-meta-renesas') {
+    // TODO
+}		// end CI-meta-renesas
+
+
+matrixJob(folderName + '/CI-z_sandbox') {
+    // TODO
+}		// end CI-z_sandbox
+
+
 matrixJob(folderName + '/MIRROR-featchall-push') {
   // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
   configure { project ->
@@ -83,6 +128,11 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
       shell(readFileFromWorkspace('mydsl/MIRROR-featchall-push_buildstep.sh'))
   }
 }		// end MIRROR-fetachall-push
+
+
+matrixJob(folderName + '/RELEASE-AGL-albacore') {
+    // TODO
+}		// end RELEASE-AGL-albacore
 
 
 matrixJob(folderName + '/SNAPSHOT-AGL-master') {
@@ -121,15 +171,5 @@ matrixJob(folderName + '/SNAPSHOT-AGL-master') {
       archiveArtifacts('${MACHINE}_default.xml')
   }
 }		// end SNAPSHOT-AGL-master
-
-
-matrixJob(folderName + '/CI-AGL-repo') {
-    // TODO
-}		// end CI-AGL-repo
-
-
-matrixJob(folderName + '/CI-AGL-DemoApps-CES2016') {
-    // TODO
-}		// end CI-AGL-DemoApps-CES2016
 
 // EOF

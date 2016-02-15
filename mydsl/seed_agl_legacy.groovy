@@ -1,6 +1,6 @@
 /* 
   Project: https://github.com/gmacario/jenkins-build-agl-distro
-  File:    mydsl/sseed_agl_legacy.groovy
+  File:    mydsl/seed_agl_legacy.groovy
 */
   
 /*
@@ -55,10 +55,11 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
   
   // TODO: Configuration Matrix
   axes {
-    label('yocto')
+    label('label', 'yocto')
     text('MACHINE', 'qemux86', 'qemux86-64', 'porter')
   }
   steps {
+      shell "printenv"
       shell "echo TODO"
   }
 }

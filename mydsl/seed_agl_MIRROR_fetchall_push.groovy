@@ -27,23 +27,58 @@ Browse `${JENKINS_URL}/job/seed_agl_MIRROR_fetchall_push/`, then click **Build N
 Result: Project `MIRROR-featchall-push` will be listed in `${JENKINS_URL}`
 */
 
-// def jobName = "MIRROR-featchall-push"
+def folderName = 'AGL-legacy'
 // def gitUrl = "https://github.com/gmacario/genivi-demo-platform"
 // def gitBranch = "qemux86-64"
 
-job(jobName) {
-  label('yocto')
+folder(folderName) {
+  displayName('build.automotivelinux.org')
+  description('Replica of https://build.automotivelinux.org/')
+}
+
+freeStyleJob(folderName + '/releng-scripts') {
   scm {
-    /* git(gitUrl, gitBranch) {
-      // TODO
-    } */
-  }
-  steps {
-    // shell "id"
-    // shell "printenv"
-    // shell "ps axf"
-    // shell "bash -xec \"source init.sh && bitbake genivi-demo-platform\""
+      git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
+        branches('*/master')
+      }
   }
 }
+
+matrixJob(folderName + '/MIRROR-featchall-push') {
+  
+  // TODO: Discard Old Builds: Yes / Strategy: Log Rotation / Max number of builds to keep: 2
+  
+  // TODO: Restrict where this project can be run: Yes / Label Expression: Yocto
+  
+  childCustomWorkspace('../${MACHINE}')
+  
+  // TODO: Build periodically / Schedule: TODO
+  
+  // TODO: Configuration Matrix
+  axes {
+    label('yocto')
+    text('MACHINE', 'qemux86', 'qemux86-64', 'porter')
+  }
+ 
+}
+
+
+
+/*
+ label('yocto')
+
+  scm {
+      git(gitUrl, gitBranch) {
+        // TODO
+      }
+  }
+
+  steps {
+      shell "id"
+      // shell "printenv"
+      // shell "ps axf"
+      // shell "bash -xec \"source init.sh && bitbake genivi-demo-platform\""
+  }
+*/
 
 // EOF

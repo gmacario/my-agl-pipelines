@@ -45,7 +45,17 @@ freeStyleJob(folderName + '/releng-scripts') {
 
 matrixJob(folderName + '/MIRROR-featchall-push') {
   
-  // TODO: Discard Old Builds: Yes / Strategy: Log Rotation / Max number of builds to keep: 2
+  // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
+  configure { project ->
+    project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
+      strategy(class: "hudson.tasks.LogRotator") {
+        daysToKeep(-1)
+        numToKeep(2)
+        artifactDaysToKeep(-1)
+        artifactNumToKeep(-1)
+      }
+    }
+  }
   
   // TODO: Restrict where this project can be run: Yes / Label Expression: Yocto
   

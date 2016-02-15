@@ -54,7 +54,6 @@ freeStyleJob(folderName + '/releng-scripts') {
 
 
 matrixJob(folderName + '/MIRROR-featchall-push') {
-  
   // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
   configure { project ->
       project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
@@ -69,30 +68,24 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
       (project / 'assignedNode').value = 'yocto'
       (project / 'canRoam').value = 'false'
   }
-  
   // Advanced Project Options / Use custom child workspace
   childCustomWorkspace('../${MACHINE}')
-  
   // Build Triggers / Build periodically / Schedule: TODO
   // TODO
-  
   // Configuration Matrix
   axes {
       label('label', 'yocto')
       text('MACHINE', 'qemux86', 'qemux86-64', 'porter')
   }
-  
   // Build > Add build step > Execute shell
   steps {
       shell "printenv"
       shell(readFileFromWorkspace('mydsl/MIRROR-featchall-push_buildstep.sh'))
   }
-  
 }		// end MIRROR-fetachall-push
 
 
 matrixJob(folderName + '/SNAPSHOT-AGL-master') {
-  
   // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
   configure { project ->
       project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
@@ -103,34 +96,30 @@ matrixJob(folderName + '/SNAPSHOT-AGL-master') {
               artifactNumToKeep(-1)
           }
       }
+      // Advanced Project Options / Restrict where this project can be run: Yes / Label Expression: Yocto
+      (project / 'assignedNode').value = 'yocto'
+      (project / 'canRoam').value = 'false'
   }
-  
   // Restrict where this project can be run: Yes / Label Expression: Yocto
   // TODO
-  
   // Advanced Project Options / Use custom child workspace
   childCustomWorkspace('../${MACHINE}')
-  
   // Build Triggers / Build periodically / Schedule: TODO
   // TODO
-  
   // Configuration Matrix
   axes {
       label('label', 'yocto')
       text('MACHINE', 'qemux86-64', 'intel-corei7-64')
   }
-  
   // Build > Add build step > Execute shell
   steps {
       shell "printenv"
       shell(readFileFromWorkspace('mydsl/SNAPSHOT-AGL-master_buildstep.sh'))
   }
-  
   // Post-build Actions > Archive the artifacts
   publishers {
       archiveArtifacts('${MACHINE}_default.xml')
   }
-  
 }		// end SNAPSHOT-AGL-master
 
 // EOF

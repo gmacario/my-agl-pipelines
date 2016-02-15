@@ -122,4 +122,14 @@ matrixJob(folderName + '/SNAPSHOT-AGL-master') {
   }
 }		// end SNAPSHOT-AGL-master
 
+
+matrixJob(folderName + '/CI-AGL-repo') {
+    // TODO
+}		// end CI-AGL-repo
+
+
+matrixJob(folderName + '/CI-AGL-DemoApps-CES2016') {
+    // TODO
+}		// end CI-AGL-DemoApps-CES2016
+
 // EOF

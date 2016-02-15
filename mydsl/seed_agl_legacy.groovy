@@ -82,4 +82,47 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
   
 }		// end MIRROR-fetachall-push
 
+
+matrixJob(folderName + '/SNAPSHOT-AGL-master') {
+  
+  // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
+  configure { project ->
+      project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
+          strategy(class: "hudson.tasks.LogRotator") {
+              daysToKeep(-1)
+              numToKeep(2)
+              artifactDaysToKeep(-1)
+              artifactNumToKeep(-1)
+          }
+      }
+  }
+  
+  // Restrict where this project can be run: Yes / Label Expression: Yocto
+  // TODO
+  
+  // Advanced Project Options / Use custom child workspace
+  childCustomWorkspace('../${MACHINE}')
+  
+  // Build Triggers / Build periodically / Schedule: TODO
+  // TODO
+  
+  // Configuration Matrix
+  axes {
+      label('label', 'yocto')
+      text('MACHINE', 'qemux86-64', 'intel-corei7-64')
+  }
+  
+  // Build > Add build step > Execute shell
+  steps {
+      shell "printenv"
+      shell "echo TODO"
+  }
+  
+  // Post-build Actions > Archive the artifacts
+  publishers {
+      archiveArtifacts('${MACHINE}_default.xml')
+  }
+  
+}		// end SNAPSHOT-AGL-master
+
 // EOF

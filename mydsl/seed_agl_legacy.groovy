@@ -15,6 +15,10 @@ then click **OK**.
 
 Browse `${JENKINS_URL}/job/seed_agl_legacy/configure` and change
 
+* Source Code Management: Git
+  - Repositories
+    - Repository URL: https://github.com/gmacario/jenkins-build-agl-distro
+
 * Build
   - Add build step > Process Job DSLs
     - Use the provided DSL script: Yes
@@ -77,7 +81,7 @@ matrixJob(folderName + '/MIRROR-featchall-push') {
   // Build > Add build step > Execute shell
   steps {
       shell "printenv"
-      shell "echo TODO"
+      shell "echo TODO shell 'MIRROR-featchall-push_buildstep.sh'"
   }
   
 }		// end MIRROR-fetachall-push
@@ -115,7 +119,7 @@ matrixJob(folderName + '/SNAPSHOT-AGL-master') {
   // Build > Add build step > Execute shell
   steps {
       shell "printenv"
-      shell "echo TODO"
+      shell "echo TODO shell 'SNAPSHOT-AGL-master_buildstep.sh'"
   }
   
   // Post-build Actions > Archive the artifacts

@@ -78,7 +78,23 @@ matrixJob(folderName + '/CI-external-poky') {
 }		// end CI-external-poky
 
 
-matrixJob(folderName + '/CI-meta-agl') {
+freeStyleJob(folderName + '/CI-meta-agl') {
+    // TODO: Depends on https://github.com/gmacario/easy-jenkins/pull/46
+    multiscm {
+        git('https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl') {
+            branches('refs/changes/93/5393/1')			// ???
+            // branches('*/master')		// ???
+        }
+        git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
+            branches('*/master')
+            relativeTargetDir('releng-scripts')
+        }
+    }
+  	// Build > Add build step > Execute shell
+  	steps {
+      shell "printenv"
+      shell(readFileFromWorkspace('mydsl/CI-meta-agl_buildstep.sh'))
+  	}
     // TODO
 }		// end CI-meta-agl
 

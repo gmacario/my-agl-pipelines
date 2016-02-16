@@ -86,14 +86,24 @@ freeStyleJob(folderName + '/CI-meta-agl') {
   }
   // TODO: Depends on https://github.com/gmacario/easy-jenkins/pull/46
   multiscm {
-        git('https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl') {
-            branches('refs/changes/93/5393/1')			// ???
-            // branches('*/master')		// ???
+    git('https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl') {
+      branches('refs/changes/93/5393/1')			// ???
+      // branches('*/master')		// ???
+      //  
+      // DEBUG
+      configure { gitScm ->
+        gitScm << 'extensions' {
+          // 'hudson.plugins.git.extensions.impl.RelativeTargetDirectory'
+          relativeTargetDir << 'meta-agl'
         }
-        git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
-            branches('*/master')
-            relativeTargetDir('releng-scripts')
-        }
+      }
+      // END DEBUG
+      //   
+    }
+    git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
+      branches('*/master')
+      // relativeTargetDir('releng-scripts')
+    }
   }
   // Build > Add build step > Execute shell
   steps {

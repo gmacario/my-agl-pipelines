@@ -79,8 +79,13 @@ matrixJob(folderName + '/CI-external-poky') {
 
 
 freeStyleJob(folderName + '/CI-meta-agl') {
-    // TODO: Depends on https://github.com/gmacario/easy-jenkins/pull/46
-    multiscm {
+  configure { project ->
+      // Advanced Project Options / Restrict where this project can be run: Yes / Label Expression: Yocto
+      (project / 'assignedNode').value = 'yocto'
+      (project / 'canRoam').value = 'false'
+  }
+  // TODO: Depends on https://github.com/gmacario/easy-jenkins/pull/46
+  multiscm {
         git('https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl') {
             branches('refs/changes/93/5393/1')			// ???
             // branches('*/master')		// ???
@@ -89,13 +94,13 @@ freeStyleJob(folderName + '/CI-meta-agl') {
             branches('*/master')
             relativeTargetDir('releng-scripts')
         }
-    }
-  	// Build > Add build step > Execute shell
-  	steps {
+  }
+  // Build > Add build step > Execute shell
+  steps {
       shell "printenv"
       shell(readFileFromWorkspace('mydsl/CI-meta-agl_buildstep.sh'))
-  	}
-    // TODO
+  }
+  // TODO
 }		// end CI-meta-agl
 
 
@@ -115,8 +120,8 @@ matrixJob(folderName + '/CI-z_sandbox') {
 
 
 matrixJob(folderName + '/MIRROR-featchall-push') {
-  // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
   configure { project ->
+      // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
       project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
           strategy(class: "hudson.tasks.LogRotator") {
               daysToKeep(-1)
@@ -152,8 +157,8 @@ matrixJob(folderName + '/RELEASE-AGL-albacore') {
 
 
 matrixJob(folderName + '/SNAPSHOT-AGL-master') {
-  // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
   configure { project ->
+      // Discard Old Builds: Yes / Strategy: Log Rotation / Max num of builds to keep: 2
       project / 'properties' << 'jenkins.model.BuildDiscarderProperty' {
           strategy(class: "hudson.tasks.LogRotator") {
               daysToKeep(-1)
@@ -166,8 +171,6 @@ matrixJob(folderName + '/SNAPSHOT-AGL-master') {
       (project / 'assignedNode').value = 'yocto'
       (project / 'canRoam').value = 'false'
   }
-  // Restrict where this project can be run: Yes / Label Expression: Yocto
-  // TODO
   // Advanced Project Options / Use custom child workspace
   childCustomWorkspace('../${MACHINE}')
   // Build Triggers / Build periodically / Schedule: TODO

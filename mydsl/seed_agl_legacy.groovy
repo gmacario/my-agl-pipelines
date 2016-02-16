@@ -89,14 +89,15 @@ freeStyleJob(folderName + '/CI-meta-agl') {
     git('https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl') {
       branches('refs/changes/93/5393/1')			// ???
       // branches('*/master')		// ???
-      //  
+      // 
+      relativeTargetDir('meta-agl')
       // DEBUG
-      configure { gitScm ->
-        gitScm << 'extensions' {
-          // 'hudson.plugins.git.extensions.impl.RelativeTargetDirectory'
-          relativeTargetDir << 'meta-agl'
-        }
-      }
+      // configure { node ->
+      //   // node represents <hudson.plugins.git.GitSCM>
+      //   node << 'extensions'
+      //   node / 'extensions' << 'relativeTargetDir'
+      //   (node / 'extensions' << 'relativeTargetDir').value = 'meta-agl'
+      // }
       // END DEBUG
       //   
     }

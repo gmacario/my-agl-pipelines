@@ -6,6 +6,6 @@
 env | sort
 # DEBUG
 
-test x == xCI-meta-agl && releng-scripts/CI-meta-agl/jenkins.sh
+test x == xCI-meta-agl || releng-scripts/CI-meta-agl/jenkins.sh
 
 # EOF

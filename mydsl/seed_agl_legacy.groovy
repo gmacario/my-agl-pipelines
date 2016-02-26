@@ -43,15 +43,20 @@ folder(folderName) {
     description('Replica of https://build.automotivelinux.org/')
 }
 
+
 freeStyleJob(folderName + '/00-TEST-SNAPSHOT-AGL-master') {
-  // TODO
   // Build Environment > Build inside a Docker Container: Yes
   // - Docker image to use: Pull docker image from repository
   //   - Image id/tag: `gmacario/build-yocto`
-   
+  wrappers {
+    buildInDocker {
+      image('gmacario/build-yocto')
+      // volume('/dev/urandom', '/dev/random')
+      verbose()
+    }
+  }
   // Build > Execute shell
   steps {
-      shell "printenv"
       shell(readFileFromWorkspace('mydsl/00-TEST-SNAPSHOT-AGL-master_buildstep.sh'))
   }
 }		// end 00-TEST-SNAPSHOT-AGL-master

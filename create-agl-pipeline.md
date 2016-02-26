@@ -1,4 +1,4 @@
-# jenkins-build-agl-distro
+# Create AGL pipeline
 
 Instructions for setting up a Pipeline for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
 

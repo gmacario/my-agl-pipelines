@@ -44,21 +44,16 @@ folder(folderName) {
 }
 
 freeStyleJob(folderName + '/00-TEST-SNAPSHOT-AGL-master') {
-    // scm {
-    //     git('https://gerrit.automotivelinux.org/gerrit/AGL/releng-scripts') {
-    //         branches('*/master')
-    //     }
-    // }
-    
-    // TODO
-    
-    // Build Environment > Build inside a Docker Container: Yes
-    // - Docker image to use: Pull docker image from repository
-    //   - Image id/tag: `gmacario/build-yocto`
-    
-    // Build > Execute shell
-    // - Command: TODO
-    
+  // TODO
+  // Build Environment > Build inside a Docker Container: Yes
+  // - Docker image to use: Pull docker image from repository
+  //   - Image id/tag: `gmacario/build-yocto`
+   
+  // Build > Execute shell
+  steps {
+      shell "printenv"
+      shell(readFileFromWorkspace('mydsl/00-TEST-SNAPSHOT-AGL-master_buildstep.sh'))
+  }
 }		// end 00-TEST-SNAPSHOT-AGL-master
 
 

@@ -20,6 +20,8 @@ Instructions for setting up a Pipeline for building the [AGL Distribution](https
 
 * Browse `${JENKINS_URL}/jobs/seed-agl`, then click **Build Now**
 
-TODO
+### License and Copyright
+
+easy-jenkins is licensed under the MIT License - for details please see the `LICENSE` file.
 
 Copyright 2016, [Gianpaolo Macario](http://gmacario.github.io/)

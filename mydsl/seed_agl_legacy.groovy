@@ -54,7 +54,7 @@ freeStyleJob(folderName + '/00-TEST-SNAPSHOT-AGL-master') {
     buildInDocker {
       image('gmacario/build-yocto')
       // volume('/dev/urandom', '/dev/random')
-      verbose()
+      // verbose()
       forcePull(true)
     }
   }

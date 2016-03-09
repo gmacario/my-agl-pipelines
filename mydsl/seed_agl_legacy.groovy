@@ -1,6 +1,8 @@
 /* 
   Project: https://github.com/gmacario/jenkins-build-agl-distro
   File:    mydsl/seed_agl_legacy.groovy
+  
+  See also: https://jenkinsci.github.io/job-dsl-plugin/
 */
   
 /*
@@ -53,6 +55,7 @@ freeStyleJob(folderName + '/00-TEST-SNAPSHOT-AGL-master') {
       image('gmacario/build-yocto')
       // volume('/dev/urandom', '/dev/random')
       verbose()
+      forcePull(true)
     }
   }
   // Build > Execute shell

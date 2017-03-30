@@ -24,7 +24,8 @@ Instructions for setting up a Declarative Pipeline for building [Automotive Grad
         - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro`
       - Branches to build: `*/use-declarative-pipeline`
       - Script Path: `Jenkinsfile`
-then click **Save*
+
+  then click **Save**
 
 ### Run project `build-agl-distro`
 

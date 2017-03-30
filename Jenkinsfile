@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'gmacario/build-yocto:build-yocto-install-utf8'
+      image 'gmacario/build-yocto:latest'
     }    
   }
   parameters {

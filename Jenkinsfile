@@ -5,8 +5,14 @@ pipeline {
     }    
   }
   parameters {
-    string(name: 'gitUrl', defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo')
-    string(name: 'gitBranch', defaultValue: 'master')
+    string(
+      name: 'gitUrl', 
+      defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo',
+      description: "Git URL where to checkout sources")
+    string(
+      name: 'gitBranch',
+      defaultValue: 'master',
+      description: "branch to checkout")
   }
   stages {
     stage('Checkout') {
@@ -14,18 +20,18 @@ pipeline {
         echo 'Checkout stage'
         // git(url: 'https://github.com/GENIVI/genivi-dev-platform', branch: 'master', changelog: true)
         
-        git(url: ${params.gitUrl}, branch: ${params.gitBranch})
+        git(url: "${params.gitUrl}", branch: "${params.gitBranch}")
         // git(url: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', branch: 'master')
   
-  // DEBUG
-  sh 'id'
-  sh 'printenv'
-  sh 'ps axf'
-  sh 'df -h'
-  sh 'ls -la'
-  
-  // Adapted from https://build.automotivelinux.org/job/CI-AGL-repo/
-  sh '''#!/bin/bash -xe
+        // DEBUG
+        sh 'id'
+        sh 'printenv'
+        sh 'ps axf'
+        sh 'df -h'
+        sh 'ls -la'
+
+        // Adapted from https://build.automotivelinux.org/job/CI-AGL-repo/
+        sh '''#!/bin/bash -xe
 #
 mv repoclone repoclone2 || true
 mkdir -p repoclone
@@ -33,15 +39,16 @@ ionice rm -rf repoclone2
 cd repoclone
 '''
 
-  sh 'repo init -m default.xml -u ' + ${params.gitUrl}
+        sh "repo init -m default.xml -u ${params.gitUrl}"
 
-  sh '''#!/bin/bash -xe
+        sh '''#!/bin/bash -xe
 #
 # mkdir -p .repo/manifests/
 # cp -L ../AGL-repo/default.xml .repo/manifests/
 # cat .repo/manifests/default.xml
 repo sync --force-sync
 repo manifest -r
+# EOF
 '''
       }
      }
@@ -65,7 +72,8 @@ echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
 bitbake agl-image-ivi
 cat current_default.xml
 
-# EOF'''
+# EOF
+'''
       }
     }
     stage('Test') {
@@ -89,3 +97,5 @@ cat current_default.xml
     }
   }
 }
+
+// EOF

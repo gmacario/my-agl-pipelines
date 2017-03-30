@@ -6,7 +6,7 @@ pipeline {
   }
   parameters {
     string(name: 'gitUrl', defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo')
-    string(name: 'gitBranch', defaultvalue: 'master')
+    string(name: 'gitBranch', defaultValue: 'master')
   }
   stages {
     stage('Checkout') {

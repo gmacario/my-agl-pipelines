@@ -1,20 +1,37 @@
-// jenkins-build-agl-distro/Jenkinsfile
+pipeline {
+  agent {
+    docker {
+      image 'gmacario/build-yocto'
+    }    
+  }
+  parameters {
+    string(
+      name: 'gitUrl', 
+      defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo',
+      description: "Git URL where to checkout sources")
+    string(
+      name: 'gitBranch',
+      defaultValue: 'master',
+      description: "branch to checkout")
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        echo 'Checkout stage'
+        // git(url: 'https://github.com/GENIVI/genivi-dev-platform', branch: 'master', changelog: true)
+        
+        git(url: "${params.gitUrl}", branch: "${params.gitBranch}")
+        // git(url: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', branch: 'master')
+  
+        // DEBUG
+        sh 'id'
+        sh 'printenv'
+        sh 'ps axf'
+        sh 'df -h'
+        sh 'ls -la'
 
-node('yocto') {
-  // def gitUrl = 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo'
-  // def gitBranch = 'master'
-  
-  git url: gitUrl, branch: gitBranch
-  
-  // DEBUG
-  sh 'id'
-  sh 'printenv'
-  sh 'ps axf'
-  sh 'df -h'
-  sh 'ls -la'
-  
-  // Adapted from https://build.automotivelinux.org/job/CI-AGL-repo/
-  sh '''#!/bin/bash -xe
+        // Adapted from https://build.automotivelinux.org/job/CI-AGL-repo/
+        sh '''#!/bin/bash -xe
 #
 mv repoclone repoclone2 || true
 mkdir -p repoclone
@@ -22,19 +39,24 @@ ionice rm -rf repoclone2
 cd repoclone
 '''
 
-  sh 'repo init -m default.xml -u ' + gitUrl
+        sh "repo init -m default.xml -u ${params.gitUrl}"
 
-  sh '''#!/bin/bash -xe
+        sh '''#!/bin/bash -xe
 #
 # mkdir -p .repo/manifests/
 # cp -L ../AGL-repo/default.xml .repo/manifests/
 # cat .repo/manifests/default.xml
 repo sync --force-sync
 repo manifest -r
+# EOF
 '''
-
-  // TODO: Should parameterize args to envsetup.sh (qemux86-64, agl-image-ivi-build)
-  sh '''#!/bin/bash -xe
+      }
+     }
+    stage('Build') {
+      steps {
+        echo 'Building'
+        // TODO: Should parameterize args to envsetup.sh (qemux86-64, agl-image-ivi-build)
+        sh '''#!/bin/bash -xe
 #
 mv agl-image-ivi-build agl-image-ivi-build2 || true
 # mkdir -p ../downloads
@@ -49,15 +71,31 @@ echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
 # ln -sf ../../sstate-cache
 bitbake agl-image-ivi
 cat current_default.xml
-'''
 
-  // Leftovers from build-gdp:
-  // TODO: sh 'bash -xec "source init.sh && bitbake genivi-demo-platform"'
-  
-  sh 'ls -la'
-  // TODO
-  
-  // TODO: Archive artifacts
-} // node
+# EOF
+'''
+      }
+    }
+    stage('Test') {
+      steps {
+        parallel(
+          "Chrome": {
+            echo 'Testing in Chrome'
+            
+          },
+          "Firefox": {
+            echo 'Testing in Firefox'
+            
+          }
+        )
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploying'
+      }
+    }
+  }
+}
 
 // EOF

@@ -2,7 +2,7 @@
 
 **WORK-IN-PROGRESS**
 
-Instructions for setting up a Pipeline for building the [AGL Distribution](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
+Instructions for setting up a Declarative Pipeline for building [Automotive Grade Linux](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
 
 ## Preparation
 
@@ -11,17 +11,27 @@ Instructions for setting up a Pipeline for building the [AGL Distribution](https
 
 ## Step-by-step Instructions
 
-### Create project `seed-agl`
+### Create project `build-agl-distro`
 
-* Browse `${JENKINS_URL}/script`
-* Paste the contents of [seed-agl.groovy](https://github.com/gmacario/jenkins-build-agl-distro/raw/master/seed-agl.groovy) into the text area, then click **OK**
+* Browse `${JENKINS_URL}` > New Item
+  - Name: `build-agl-distro`
+  - Type: **Pipeline**
+  then click **OK** and configure the project properties
+  
+  - Definition: Pipeline script from SCM
+    - SCM: Git
+      - Repositories
+        - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro`
+      - Branches to build: `*/use-declarative-pipeline`
+      - Script Path: `Jenkinsfile`
+then click **Save*
 
-### Run project `seed-agl`
+### Run project `build-agl-distro`
 
-* Browse `${JENKINS_URL}/jobs/seed-agl`, then click **Build Now**
+* Browse `${JENKINS_URL}/jobs/build-agl-distro`, then click **Build Now**
 
 ### License and Copyright
 
 easy-jenkins is licensed under the MIT License - for details please see the `LICENSE` file.
 
-Copyright 2016, [Gianpaolo Macario](http://gmacario.github.io/)
+Copyright 2016-2017, [Gianpaolo Macario](http://gmacario.github.io/)

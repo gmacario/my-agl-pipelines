@@ -14,7 +14,7 @@ pipeline {
         echo 'Checkout stage'
         // git(url: 'https://github.com/GENIVI/genivi-dev-platform', branch: 'master', changelog: true)
         
-        git(url: $(params.gitUrl), branch: $(params.gitBranch))
+        git(url: ${params.gitUrl}, branch: ${params.gitBranch})
         // git(url: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', branch: 'master')
   
   // DEBUG
@@ -33,7 +33,7 @@ ionice rm -rf repoclone2
 cd repoclone
 '''
 
-  sh 'repo init -m default.xml -u ' + $(params.gitUrl)
+  sh 'repo init -m default.xml -u ' + ${params.gitUrl}
 
   sh '''#!/bin/bash -xe
 #

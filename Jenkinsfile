@@ -1,4 +1,8 @@
 pipeline {
+  properties([
+      gitUrl = 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo'
+      gitBranch = 'master'
+    ])
   agent {
     docker {
       image 'gmacario/build-yocto'
@@ -11,11 +15,8 @@ pipeline {
         echo 'Checkout stage'
         // git(url: 'https://github.com/GENIVI/genivi-dev-platform', branch: 'master', changelog: true)
         
-        // gitUrl = 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo'
-        // gitBranch = 'master'
-        // git url: gitUrl, branch: gitBranch
-        git(url: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', 
-            branch: 'master')
+        git url: gitUrl, branch: gitBranch
+        // git(url: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', branch: 'master')
   
   // DEBUG
   sh 'id'

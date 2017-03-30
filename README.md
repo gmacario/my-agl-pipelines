@@ -26,7 +26,7 @@ Inside the project configuration page, add the following information
   - SCM: Git
     - Repositories
       - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro`
-    - Branches to build: `*/use-declarative-pipeline`
+    - Branches to build: `*/master`
   - Script Path: `Jenkinsfile`
   - Lightweight checkout: Yes
 

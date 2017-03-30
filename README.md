@@ -1,4 +1,4 @@
-# jenkins-build-agl-distro
+# my-agl-pipelines
 
 **WORK-IN-PROGRESS**
 

@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'gmacario/build-yocto'
+      image 'gmacario/build-yocto:latest'
     }    
   }
   parameters {
@@ -67,6 +67,13 @@ mv agl-image-ivi-build agl-image-ivi-build2 || true
 # 
 source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
 echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
+
+# Workaround for "Please use a locale setting which supports utf-8"
+# See https://github.com/gmacario/my-agl-pipelines/issues/9
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # ln -sf ../../downloads
 # ln -sf ../../sstate-cache
 bitbake agl-image-ivi

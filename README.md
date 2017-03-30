@@ -4,32 +4,36 @@
 
 Instructions for setting up a Declarative Pipeline for building [Automotive Grade Linux](https://wiki.automotivelinux.org/agl-distro) using [Jenkins](https://jenkins-ci.org/).
 
-## Preparation
+### System Requirements
 
-* Install and configure [easy-jenkins](https://github.com/gmacario/easy-jenkins)
-* Verify that the Jenkins Dashboard is accessible at `${DOCKER_URL}` (example: http://192.168.99.100:9080/)
+* [Jenkins v2.32](https://jenkins.io/) or greater with the following installed plugins:
+  - [Blue Ocean Plugin v1.0.0-b23](https://wiki.jenkins-ci.org/display/JENKINS/Blue+Ocean+Plugin)
+  - [Pipeline Multibranch Plugin v2.12](https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Multibranch+Plugin)
+  - **NOTE**: You may use [easy-jenkins](https://github.com/gmacario/easy-jenkins) to install all the prerequisites
+* Lot of time, network bandwidth and disk space...
 
-## Step-by-step Instructions
+### Usage
 
-### Create project `build-agl-distro`
+From the Jenkins dashboard, click **New Item**
 
-* Browse `${JENKINS_URL}` > New Item
-  - Name: `build-agl-distro`
-  - Type: **Pipeline**
-  then click **OK** and configure the project properties
+* Enter an item name: `build-agl-distro`
+* Type: **Pipeline**
+
+then click **OK**.
+Inside the project configuration page, add the following information
   
-  - Definition: Pipeline script from SCM
-    - SCM: Git
+* Definition: Pipeline script from SCM
+  - SCM: Git
       - Repositories
         - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro`
       - Branches to build: `*/use-declarative-pipeline`
       - Script Path: `Jenkinsfile`
 
-  then click **Save**
+then click **Save**
 
-### Run project `build-agl-distro`
+Select job `build-agl-distro`, then click **Build Now**.
 
-* Browse `${JENKINS_URL}/jobs/build-agl-distro`, then click **Build Now**
+Click on **Blue Ocean** to display the Blue Ocean Dashboard.
 
 ### License and Copyright
 

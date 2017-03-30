@@ -22,12 +22,13 @@ From the Jenkins dashboard, click **New Item**
 then click **OK**.
 Inside the project configuration page, add the following information
   
-* Definition: Pipeline script from SCM
+* Pipeline > Definition: Pipeline script from SCM
   - SCM: Git
-      - Repositories
-        - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro`
-      - Branches to build: `*/use-declarative-pipeline`
-      - Script Path: `Jenkinsfile`
+    - Repositories
+      - Repository URL: `https://github.com/gmacario/jenkins-build-agl-distro`
+    - Branches to build: `*/use-declarative-pipeline`
+  - Script Path: `Jenkinsfile`
+  - Lightweight checkout: Yes
 
 then click **Save**
 

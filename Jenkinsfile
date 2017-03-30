@@ -1,5 +1,5 @@
 pipeline {
-  properties([
+  options([
       gitUrl = 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo'
       gitBranch = 'master'
     ])

@@ -77,7 +77,9 @@ export LANGUAGE=en_US.UTF-8
 # ln -sf ../../downloads
 # ln -sf ../../sstate-cache
 bitbake agl-image-ivi
-cat current_default.xml
+
+ls -la
+# cat current_default.xml
 
 # EOF
 '''

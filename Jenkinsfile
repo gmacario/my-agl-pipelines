@@ -2,35 +2,19 @@ pipeline {
   agent {
     docker {
       image 'gmacario/build-yocto:latest'
-    }    
-  }
-  parameters {
-    string(
-      name: 'gitUrl', 
-      defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo',
-      description: "Git URL where to checkout sources")
-    string(
-      name: 'gitBranch',
-      defaultValue: 'master',
-      description: "branch to checkout")
+    }
+    
   }
   stages {
     stage('Checkout') {
       steps {
         echo 'Checkout stage'
-        // git(url: 'https://github.com/GENIVI/genivi-dev-platform', branch: 'master', changelog: true)
-        
-        git(url: "${params.gitUrl}", branch: "${params.gitBranch}")
-        // git(url: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', branch: 'master')
-  
-        // DEBUG
+        git(url: '"${params.gitUrl}"', branch: '"${params.gitBranch}"')
         sh 'id'
         sh 'printenv'
         sh 'ps axf'
         sh 'df -h'
         sh 'ls -la'
-
-        // Adapted from https://build.automotivelinux.org/job/CI-AGL-repo/
         sh '''#!/bin/bash -xe
 #
 mv repoclone repoclone2 || true
@@ -38,9 +22,7 @@ mkdir -p repoclone
 ionice rm -rf repoclone2
 cd repoclone
 '''
-
-        sh "repo init -m default.xml -u ${params.gitUrl}"
-
+        sh '"repo init -m default.xml -u ${params.gitUrl}"'
         sh '''#!/bin/bash -xe
 #
 # mkdir -p .repo/manifests/
@@ -51,11 +33,10 @@ repo manifest -r
 # EOF
 '''
       }
-     }
+    }
     stage('Build') {
       steps {
         echo 'Building'
-        // TODO: Should parameterize args to envsetup.sh (qemux86-64, agl-image-ivi-build)
         sh '''#!/bin/bash -xe
 #
 mv agl-image-ivi-build agl-image-ivi-build2 || true
@@ -83,6 +64,10 @@ ls -la
 
 # EOF
 '''
+        sh '''ls -la tmp/
+ls -la tmp/deploy/
+ls -la tmp/deploy/images/
+ls -la tmp/deploy/images/*/'''
       }
     }
     stage('Test') {
@@ -105,6 +90,8 @@ ls -la
       }
     }
   }
+  parameters {
+    string(name: 'gitUrl', defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', description: 'Git URL where to checkout sources')
+    string(name: 'gitBranch', defaultValue: 'master', description: 'branch to checkout')
+  }
 }
-
-// EOF

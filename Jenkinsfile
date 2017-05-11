@@ -62,13 +62,9 @@ export LANGUAGE=en_US.UTF-8
 # ln -sf ../../sstate-cache
 bitbake agl-image-ivi
 
+# DEBUG
 ls -la
 # cat current_default.xml
-
-# EOF
-'''
-          sh '''#!/bin/bash -xe
-          
 ls -la tmp/
 ls -la tmp/deploy/
 ls -la tmp/deploy/images/

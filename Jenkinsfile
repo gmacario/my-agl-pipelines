@@ -23,7 +23,7 @@ mkdir -p repoclone
 ionice rm -rf repoclone2
 cd repoclone
 '''
-        sh '"repo init -m default.xml -u ${params.gitUrl}"'
+        sh "repo init -m default.xml -u ${params.gitUrl}"
         sh '''#!/bin/bash -xe
 #
 # mkdir -p .repo/manifests/

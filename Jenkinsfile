@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        ws(dir: 'agl')
+        ws(dir: 'agl') {
           echo 'Checkout stage'
           git(url: '"${params.gitUrl}"', branch: '"${params.gitBranch}"')
           sh 'id'
@@ -38,7 +38,7 @@ repo manifest -r
     }
     stage('Build') {
       steps {
-        ws(dir: 'agl')
+        ws(dir: 'agl') {
           echo 'Building'
           sh '''#!/bin/bash -xe
 #

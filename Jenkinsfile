@@ -8,14 +8,15 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        echo 'Checkout stage'
-        git(url: '"${params.gitUrl}"', branch: '"${params.gitBranch}"')
-        sh 'id'
-        sh 'printenv'
-        sh 'ps axf'
-        sh 'df -h'
-        sh 'ls -la'
-        sh '''#!/bin/bash -xe
+        ws(dir: 'agl')
+          echo 'Checkout stage'
+          git(url: '"${params.gitUrl}"', branch: '"${params.gitBranch}"')
+          sh 'id'
+          sh 'printenv'
+          sh 'ps axf'
+          sh 'df -h'
+          sh 'ls -la'
+          sh '''#!/bin/bash -xe
 #
 mv repoclone repoclone2 || true
 mkdir -p repoclone
@@ -32,12 +33,14 @@ repo sync --force-sync
 repo manifest -r
 # EOF
 '''
+        }
       }
     }
     stage('Build') {
       steps {
-        echo 'Building'
-        sh '''#!/bin/bash -xe
+        ws(dir: 'agl')
+          echo 'Building'
+          sh '''#!/bin/bash -xe
 #
 mv agl-image-ivi-build agl-image-ivi-build2 || true
 # mkdir -p ../downloads
@@ -64,10 +67,16 @@ ls -la
 
 # EOF
 '''
-        sh '''ls -la tmp/
+          sh '''#!/bin/bash -xe
+          
+ls -la tmp/
 ls -la tmp/deploy/
 ls -la tmp/deploy/images/
-ls -la tmp/deploy/images/*/'''
+ls -la tmp/deploy/images/*/
+
+# EOF
+'''
+        }
       }
     }
     stage('Test') {

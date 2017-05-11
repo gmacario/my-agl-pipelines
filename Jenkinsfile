@@ -8,21 +8,24 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        echo 'Checkout stage'
-        git(url: '"${params.gitUrl}"', branch: '"${params.gitBranch}"')
-        sh 'id'
-        sh 'printenv'
-        sh 'ps axf'
-        sh 'df -h'
-        sh 'ls -la'
-        sh '''#!/bin/bash -xe
+        ws(dir: 'agl') {
+          echo 'Checkout stage'
+          git(url: "${params.gitUrl}", branch: "${params.gitBranch}")
+          sh 'id'
+          sh 'printenv'
+          sh 'ps axf'
+          sh 'df -h'
+          sh 'ls -la'
+          sh '''#!/bin/bash -xe
 #
-mv repoclone repoclone2 || true
-mkdir -p repoclone
-ionice rm -rf repoclone2
-cd repoclone
+# mv repoclone repoclone2 || true
+# mkdir -p repoclone
+# ionice rm -rf repoclone2
+# cd repoclone
+#
+# EOF
 '''
-        sh '"repo init -m default.xml -u ${params.gitUrl}"'
+        sh "repo init -m default.xml -u ${params.gitUrl}"
         sh '''#!/bin/bash -xe
 #
 # mkdir -p .repo/manifests/
@@ -30,14 +33,17 @@ cd repoclone
 # cat .repo/manifests/default.xml
 repo sync --force-sync
 repo manifest -r
+#
 # EOF
 '''
+        }
       }
     }
     stage('Build') {
       steps {
-        echo 'Building'
-        sh '''#!/bin/bash -xe
+        ws(dir: 'agl') {
+          echo 'Building'
+          sh '''#!/bin/bash -xe
 #
 mv agl-image-ivi-build agl-image-ivi-build2 || true
 # mkdir -p ../downloads
@@ -48,26 +54,28 @@ mv agl-image-ivi-build agl-image-ivi-build2 || true
 # 
 source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
 echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
-
+#
 # Workaround for "Please use a locale setting which supports utf-8"
 # See https://github.com/gmacario/my-agl-pipelines/issues/9
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-
+#
 # ln -sf ../../downloads
 # ln -sf ../../sstate-cache
 bitbake agl-image-ivi
-
+#
+# DEBUG
 ls -la
 # cat current_default.xml
-
-# EOF
-'''
-        sh '''ls -la tmp/
+ls -la tmp/
 ls -la tmp/deploy/
 ls -la tmp/deploy/images/
-ls -la tmp/deploy/images/*/'''
+ls -la tmp/deploy/images/*/
+#
+# EOF
+'''
+        }
       }
     }
     stage('Test') {

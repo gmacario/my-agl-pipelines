@@ -52,7 +52,8 @@ mv agl-image-ivi-build agl-image-ivi-build2 || true
 # eval export DL_DIR=$(pwd)/downloads/
 # eval export SSTATE_DIR=$(pwd)/../sstate-cache/
 # 
-source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
+# source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
+source meta-agl/scripts/envsetup.sh raspberrypi3 agl-image-ivi-build
 echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
 #
 # Workaround for "Please use a locale setting which supports utf-8"
@@ -101,5 +102,6 @@ ls -la tmp/deploy/images/*/
   parameters {
     string(name: 'gitUrl', defaultValue: 'https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo', description: 'Git URL where to checkout sources')
     string(name: 'gitBranch', defaultValue: 'master', description: 'branch to checkout')
+    // string(name: 'machine', defaultValue: 'raspberrypi3', description: 'Target machine to build image for')
   }
 }

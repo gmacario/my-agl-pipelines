@@ -45,7 +45,7 @@ repo manifest -r
           echo 'Building'
           sh '''#!/bin/bash -xe
 #
-mv agl-image-ivi-build agl-image-ivi-build2 || true
+# mv agl-image-ivi-build agl-image-ivi-build2 || true
 # mkdir -p ../downloads
 # ionice rm -rf agl-image-ivi-build2
 # mkdir -p ../state-cache

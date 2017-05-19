@@ -95,7 +95,19 @@ ls -la tmp/deploy/images/*/
     }
     stage('Deploy') {
       steps {
-        echo 'Deploying'
+        echo 'INFO: Deploying'
+        sh '''#!/bin/bash -xe
+# DEBUG
+pwd
+ls -la
+ls -la build/
+ls -la build/tmp/
+ls -la build/tmp/deploy/
+ls -la build/tmp/deploy/images/
+ls -la build/tmp/deploy/images/raspberrypi3/
+# EOF'''
+        archive 'build/tmp/deploy/images/*/*.rootfs.manifest'
+        archive 'build/tmp/deploy/images/*/*.rootfs.rpi-sdimg'
       }
     }
   }

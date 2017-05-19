@@ -100,14 +100,14 @@ ls -la tmp/deploy/images/*/
 # DEBUG
 pwd
 ls -la
-ls -la build/
-ls -la build/tmp/
-ls -la build/tmp/deploy/
-ls -la build/tmp/deploy/images/
-ls -la build/tmp/deploy/images/raspberrypi3/
+ls -la agl-image-ivi-build/
+ls -la agl-image-ivi-build/tmp/
+ls -la agl-image-ivi-build/tmp/deploy/
+ls -la agl-image-ivi-build/tmp/deploy/images/
+ls -la agl-image-ivi-build/tmp/deploy/images/raspberrypi3/
 # EOF'''
-        archive 'build/tmp/deploy/images/*/*.rootfs.manifest'
-        archive 'build/tmp/deploy/images/*/*.rootfs.rpi-sdimg'
+        archive 'agl-image-ivi-build/tmp/deploy/images/*/*.rootfs.manifest'
+        archive 'agl-image-ivi-build/tmp/deploy/images/*/*.rootfs.rpi-sdimg'
       }
     }
   }

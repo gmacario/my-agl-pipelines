@@ -53,8 +53,7 @@ repo manifest -r
 # eval export SSTATE_DIR=$(pwd)/../sstate-cache/
 # 
 #
-source meta-agl/scripts/aglsetup.sh
-# -m raspberrypi3 -b agl-image-ivi-build agl-devel agl-netboot agl-appfw-smack agl-demo
+source meta-agl/scripts/aglsetup.sh -m raspberrypi3 -b agl-image-ivi-build agl-devel agl-netboot agl-appfw-smack agl-demo
 #
 # Workaround for "Please use a locale setting which supports utf-8"
 # See https://github.com/gmacario/my-agl-pipelines/issues/9

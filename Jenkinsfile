@@ -51,7 +51,6 @@ repo manifest -r
 # mkdir -p ../state-cache
 # eval export DL_DIR=$(pwd)/downloads/
 # eval export SSTATE_DIR=$(pwd)/../sstate-cache/
-# 
 #
 source meta-agl/scripts/aglsetup.sh -m raspberrypi3 -b agl-image-ivi-build agl-devel agl-netboot agl-appfw-smack agl-demo
 #
@@ -104,7 +103,8 @@ ls -la agl-image-ivi-build/tmp/
 ls -la agl-image-ivi-build/tmp/deploy/
 ls -la agl-image-ivi-build/tmp/deploy/images/
 ls -la agl-image-ivi-build/tmp/deploy/images/raspberrypi3/
-# EOF'''
+# EOF
+'''
         archive 'agl-image-ivi-build/tmp/deploy/images/*/*.rootfs.manifest'
         archive 'agl-image-ivi-build/tmp/deploy/images/*/*.rootfs.rpi-sdimg'
       }

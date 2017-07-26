@@ -51,10 +51,8 @@ repo manifest -r
 # mkdir -p ../state-cache
 # eval export DL_DIR=$(pwd)/downloads/
 # eval export SSTATE_DIR=$(pwd)/../sstate-cache/
-# 
-# source meta-agl/scripts/envsetup.sh qemux86-64 agl-image-ivi-build
-source meta-agl/scripts/envsetup.sh raspberrypi3 agl-image-ivi-build
-echo "DEBUG: After source meta-agl/scripts/envsetup.sh ..."
+#
+source meta-agl/scripts/aglsetup.sh -m raspberrypi3 -b agl-image-ivi-build agl-devel agl-netboot agl-appfw-smack agl-demo
 #
 # Workaround for "Please use a locale setting which supports utf-8"
 # See https://github.com/gmacario/my-agl-pipelines/issues/9
@@ -105,7 +103,8 @@ ls -la agl-image-ivi-build/tmp/
 ls -la agl-image-ivi-build/tmp/deploy/
 ls -la agl-image-ivi-build/tmp/deploy/images/
 ls -la agl-image-ivi-build/tmp/deploy/images/raspberrypi3/
-# EOF'''
+# EOF
+'''
         archive 'agl-image-ivi-build/tmp/deploy/images/*/*.rootfs.manifest'
         archive 'agl-image-ivi-build/tmp/deploy/images/*/*.rootfs.rpi-sdimg'
       }
